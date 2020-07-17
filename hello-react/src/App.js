@@ -1,18 +1,11 @@
-import React from 'react';
+import React from "react";
+import "./App.css";
 
 function App() {
-  const name = 'react';
-  const style = {
-    backgroundColor: 'black',
-    color: 'aqua',
-    fontSize: '48px',
-    fontWeight: 'bold',
-    padding: 16
-  }
+  const name = "react";
+
   return (
-    <div style={style}>
-     {name === 'react' && <h1>리액트입니다.</h1>}
-    </div>
+    <div className="react">{name === "react" && <h1>리액트입니다.</h1>}</div>
   );
 }
 
