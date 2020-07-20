@@ -5,7 +5,9 @@ const EventPractice = () => {
     username: '',
     message: ''
   });
+
   const { username, message } = form;
+
   const onChange = e => {
     const nextForm = {
       ...form,
@@ -13,6 +15,7 @@ const EventPractice = () => {
     };
     setForm(nextForm);
   };
+
   const onClick = () => {
     alert(username + ': ' + message);
     setForm({
@@ -20,11 +23,13 @@ const EventPractice = () => {
       message: ''
     });
   };
+
   const onKeyPress = e => {
     if (e.key === 'Enter') {
       onClick();
     }
   };
+
   return (
     <div>
       <h1>이벤트 연습</h1>
