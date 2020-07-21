@@ -1,14 +1,9 @@
 import React from 'react';
 
 const IterationSample = () => {
-  return (
-    <ul>
-      <li>눈사람</li>
-      <li>얼음</li>
-      <li>눈</li>
-      <li>우박</li>
-    </ul>
-  );
+  const names = ['빨강', '초록', '파랑', '노랑'];
+  const nameList = names.map((name, index) => <li key={index}>{name}</li>);
+  return <ul>{nameList}</ul>;
 };
 
 export default IterationSample;
