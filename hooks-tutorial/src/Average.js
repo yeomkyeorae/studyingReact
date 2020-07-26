@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 
 const getAverage = numbers => {
   console.log("평균값 계산 중..");
@@ -20,9 +20,22 @@ const Average = () => {
     setNumber("");
   };
 
+  const avg = useMemo(() => getAverage(list), [list]);
+
   return (
     <div>
       <input value={number} onChange={onChange} />
+      <button onClick={onInsert}>등록</button>
+      <ul>
+        {list.map((value, index) => (
+          <li key={index}>{value}</li>
+        ))}
+      </ul>
+      <div>
+        <b>평균값:</b> {avg}
+      </div>
     </div>
   );
 };
+
+export default Average;
