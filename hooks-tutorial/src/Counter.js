@@ -7,6 +7,7 @@ function reducer(state, action) {
     case "DECREMENT":
       return { value: state.value - 1 };
     default:
+      // 아무것도 해당되지 않을 때 기존 상태 변환
       return state;
   }
 }
@@ -17,7 +18,7 @@ const Counter = () => {
   return (
     <div>
       <p>
-        현재 카운터 값은 <b>{state.value}</b>
+        현재 카운터 값은 <b>{state.value}</b>입니다.
       </p>
       <button onClick={() => dispatch({ type: "INCREMENT" })}>+1</button>
       <button onClick={() => dispatch({ type: "DECREMENT" })}>-1</button>
