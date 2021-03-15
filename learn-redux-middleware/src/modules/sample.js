@@ -1,5 +1,6 @@
 import { handleActions } from "redux-actions";
 import * as api from "../lib/api";
+import createRequestThunk from "../lib/createRequestThunk";
 
 // 액션 타입을 선언합니다.
 // 한 요청당 세 개를 만들어야 합니다.
@@ -15,20 +16,90 @@ const GET_USERS_FAILURE = "sample/GET_USERS_FAILURE";
 // thunk 함수 생성
 // thunk 함수 내부에서는 시작할 때, 성공했을 때, 실패했을 때 다른 액션을 디스패치
 
-export const getPost = id => async dispatch => {
-  dispatch({ type: GET_POST });
-  try {
-    const response = await api.getPost(id);
-    dispatch({
-      type: GET_POST_SUCCESS,
-      payload: response.data
-    });
-  } catch (e) {
-    dispatch({
-      type: GET_POST_FAILURE,
-      payload: e,
-      error: true
-    });
-    throw e;
-  }
+export const getPost = createRequestThunk(GET_POST, api.getPost);
+export const getUsers = createRequestThunk(GET_USERS, api.getUsers);
+
+// export const getPost = id => async dispatch => {
+//   dispatch({ type: GET_POST });
+//   try {
+//     const response = await api.getPost(id);
+//     dispatch({
+//       type: GET_POST_SUCCESS,
+//       payload: response.data
+//     });
+//   } catch (e) {
+//     dispatch({
+//       type: GET_POST_FAILURE,
+//       payload: e,
+//       error: true
+//     });
+//     throw e;
+//   }
+// };
+
+// export const getUsers = () => async dispatch => {
+//   dispatch({ type: GET_USERS });
+//   try {
+//     const response = await api.getUsers();
+//     dispatch({
+//       type: GET_USERS_SUCCESS,
+//       payload: response.data
+//     });
+//   } catch (e) {
+//     dispatch({
+//       type: GET_USERS_FAILURE,
+//       payload: e,
+//       error: true
+//     });
+//     throw e;
+//   }
+// };
+
+const initialState = {
+  post: null,
+  users: null
 };
+
+const sample = handleActions(
+  {
+    // [GET_POST]: state => ({
+    //   ...state,
+    //   loading: {
+    //     ...state.loading,
+    //     GET_POST: true
+    //   }
+    // }),
+    [GET_POST_SUCCESS]: (state, action) => ({
+      ...state,
+      post: action.payload
+    }),
+    // [GET_POST_FAILURE]: (state, action) => ({
+    //   ...state,
+    //   loading: {
+    //     ...state.loading,
+    //     GET_POST: false
+    //   }
+    // }),
+    // [GET_USERS]: state => ({
+    //   ...state,
+    //   loading: {
+    //     ...state.loading,
+    //     GET_USERS: true
+    //   }
+    // }),
+    [GET_USERS_SUCCESS]: (state, action) => ({
+      ...state,
+      users: action.payload
+    })
+    // [GET_USERS_FAILURE]: (state, action) => ({
+    //   ...state,
+    //   loading: {
+    //     ...state.loading,
+    //     GET_USERS: false
+    //   }
+    // })
+  },
+  initialState
+);
+
+export default sample;
